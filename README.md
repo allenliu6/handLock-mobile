@@ -28,7 +28,7 @@
 
 接口调用：
 > new touchLock({ n:3, //默认为3*3九宫格  
-  width:300,            //canvas宽度  默认为页面的宽度的80%
-  height:300,           //canvas高度  默认为和宽度相等
-  endCallback(){alert('a')}   //每次touch事件结束的回调，默认为空
-}).init()
+  width:300,            //canvas宽度  默认为页面的宽度的80%  
+  height:300,           //canvas高度  默认为和宽度相等  
+  endCallback(){alert('a')}   //每次touch事件结束的回调，默认为空  
+}).init()  
