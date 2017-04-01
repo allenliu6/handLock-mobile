@@ -29,6 +29,7 @@ Object.assign(touchLock.prototype, {
        this.timer = true   //true表示当前可以进行touchmove回调函数，false则相反
        this.yellowMan = []
        this.computeYellowMan()
+       this.eventStatus   //表示事件当前状态  在start前是false start后变为true  end够变为false
 
         //页面初始化
        this.drawCircle()
@@ -229,51 +230,57 @@ Object.assign(touchLock.prototype, {
         let _this = this
         this.canvas.addEventListener('touchstart', function(e){//测试当前位置数据并进行处理   触发频率高，所以不需要start时验证
             e.preventDefault();
+            _this.eventStatus = true
         })
 
         this.canvas.addEventListener('touchmove', function(e){//测试当前位置数据并进行处理
-            if (_this.timer) {
-                let rect = e.currentTarget.getBoundingClientRect(),
-                    x = e.touches[0].clientX - rect.left,
-                    y = e.touches[0].clientY - rect.top,
-                    res = _this.testPosition(x, y),
-                    flag = true;
+            if (_this.eventStatus) {
+                if (_this.timer) {
+                    let rect = e.currentTarget.getBoundingClientRect(),
+                        x = e.touches[0].clientX - rect.left,
+                        y = e.touches[0].clientY - rect.top,
+                        res = _this.testPosition(x, y),
+                        flag = true;
 
-                if(typeof res === 'number'){
-                    for(let i of _this.record){
-                        if (i === res) {
-                            flag = false
+                    if(typeof res === 'number'){
+                        for(let i of _this.record){
+                            if (i === res) {
+                                flag = false
+                            }
+                        }
+                        if (flag) {
+                            _this.lastPoint = res
+                            _this.record.push(res)
+                            _this.drawContainer(_this.lastPoint)
                         }
                     }
-                    if (flag) {
-                        _this.lastPoint = res
-                        _this.record.push(res)
-                        _this.drawContainer(_this.lastPoint)
-                    }
+
+                    _this.resetDraw()
+                    _this.updata(x, y)
+                    _this.timer = false
+
+                    setTimeout(function(){
+                        _this.timer = true
+                    },40)
+                }else{
+                    return 
                 }
-
-                _this.resetDraw()
-                _this.updata(x, y)
-                _this.timer = false
-
-                setTimeout(function(){
-                    _this.timer = true
-                },40)
-            }else{
-                return 
             }
         })
 
         this.canvas.addEventListener('touchend', function(e){
-            _this.dealPassword()
-            _this.record = []
-            _this.lastPoint = undefined
-            _this.endCallback && _this.endCallback()
-            _this.computeYellowMan()
+            if (_this.eventStatus) {
+                _this.eventStatus = false
+                _this.dealPassword()
+                _this.record = []
+                _this.lastPoint = undefined
+                _this.endCallback && _this.endCallback()
+                _this.computeYellowMan()
 
-            setTimeout(function(){
-                _this.resetDraw()
-            }, 300);
+                setTimeout(function(){
+                    _this.resetDraw()
+                }, 300);
+            }
         })
         this.canvas.addEventListener('touchmove', function(e){
             e.preventDefault();
