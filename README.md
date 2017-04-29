@@ -1,6 +1,7 @@
 # handLock-mobile
-*移动端手势密码*
-## 目标位实现一个可以在基本Android、iOS手机进行手势设置密码，手势验证密码功能的组件，原型设计如下图所示  
+*移动端手势密码*  
+
+### 目标位实现一个可以在基本Android、iOS手机进行手势设置密码，手势验证密码功能的组件，原型设计如下图所示  
 
 ![](https://p1.ssl.qhimg.com/t01d73f4b567014b497.png "界面图")
 ![](https://p5.ssl.qhimg.com/t01ad2dbd1fa3195d55.png "效果图1")
