@@ -29,12 +29,25 @@
 ~~3.完成各部分解耦封装，只保留统一接口供调用，并提供适当扩展参数选项，3月29日前完成（好像稍微提前了一些哦 3.28）~~  
 ~~4.改善UI并适当改善逻辑（逻辑应该还有改善余地，UI更是，未完待续  3.29）~~  
 5.改善代码细节问题，规范化  
-6.追加：canvas渲染机制分层，API改良（暴露过程行为和外观）  
+~~6.追加：canvas渲染机制分层，API改良（暴露过程行为和外观）~~  
 
 #### 接口调用（暂定）：
 ```js
 new touchLock({  
-   n:3, //默认为3*3九宫格  
-   endCallback(){alert('a')}   //每次touch事件结束的回调，默认为空  
-}).init()  
+                customStyle: false,                                         //boolean   是否自定义样式
+                checkBtn: document.querySelector('#testRadio'),             //check单选框
+                updataBtn: document.querySelector('#setRadio'),             //updata单选框
+                hint: document.querySelector('#hint'),                      //消息提示框
+                background: 'url("background2.jpeg")',                      //url    container背景
+                textColor: '#fff',                                          //文字颜色
+                rightColor: '#8cf939',                                      //选择正确后空心圆的颜色
+                wrongColor: '#fb4920',                                      //选择错误后空心圆的颜色
+                canvasWidth: false,                                         //是否自定义canvas宽度
+                chooseType: 3,                                              //手势密码圆数量 默认为3*3
+                render: true,                                               //自动渲染
+                originR: 0.3,                                               //半径占圆心距的比例
+                customFilledPicUrl: `./yellowMan/filledPic.png`,            //填充空心圆图片相对路径，filledPic + index确认唯一图片---形如`./yellowMan/filledPic${index}.png`
+                customFilledPicNumber: 19,                                  //填充空心圆图片的总数 
+                minPoint: 5,                                                //手势密码的最小连接数目
+}).init()  
 ```
