@@ -37,7 +37,7 @@
 
 #### 接口调用（暂定）：
 ```js
-new touchLock({  
+new lockr({  
      customStyle: false,                                         //boolean   是否自定义样式
      checkBtn: document.querySelector('#testRadio'),             //check单选框
      updataBtn: document.querySelector('#setRadio'),             //updata单选框
@@ -53,5 +53,5 @@ new touchLock({
      customFilledPicUrl: `./yellowMan/filledPic.png`,            //填充空心圆图片相对路径，filledPic + index确认唯一图片---形如`./yellowMan/filledPic${index}.png`
      customFilledPicNumber: 19,                                  //填充空心圆图片的总数 
      minPoint: 5,                                                //手势密码的最小连接数目
-}).init()  
+})  
 ```
